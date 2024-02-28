@@ -41,8 +41,14 @@ func _on_mob_timer_timeout():
 	# set mob's direction perpendicular to path
 	var direction = mob_spawn_location.rotation + PI / 2
 	
+	# calculate the opposite direction (off screen), then move
+	# the mob a bit in that direction to allow for smoother entering of mobs
+	var opposite_dir = direction + PI
+	var pos = mob_spawn_location.position
+	var opposite_pos = Vector2.from_angle(opposite_dir)
+	
 	# set mob's position to random
-	mob.position = mob_spawn_location.position
+	mob.position = mob_spawn_location.position + (opposite_pos * 30.0)
 	
 	# add some randomness to the direction a bit
 	direction += randf_range(-PI / 4, PI / 4)
