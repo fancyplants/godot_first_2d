@@ -25,6 +25,10 @@ func new_game():
 	
 	$HUD.update_score(score)
 	$HUD.show_message("Get Ready")
+	
+	# every node with the group "mobs" will have queue_free() called on it.
+	# this will wipe new games of old mobs
+	get_tree().call_group("mobs", "queue_free")
 
 
 func _on_mob_timer_timeout():
