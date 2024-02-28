@@ -13,4 +13,7 @@ func _process(delta):
 
 # when mobs move off the screen, queue them to be removed from the game
 func _on_visible_on_screen_notifier_2d_screen_exited():
+	# setup a one-shot timer to wait 1 second after mob has exited the screen
+	# to make them smoothly go fully off-screen before freeing them
+	await get_tree().create_timer(1.0).timeout
 	queue_free()
