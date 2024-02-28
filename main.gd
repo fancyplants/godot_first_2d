@@ -17,6 +17,8 @@ func game_over():
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 	$HUD.show_game_over()
+	$Music.stop()
+	$DeathSound.play()
 
 func new_game():
 	score = 0
@@ -29,6 +31,7 @@ func new_game():
 	# every node with the group "mobs" will have queue_free() called on it.
 	# this will wipe new games of old mobs
 	get_tree().call_group("mobs", "queue_free")
+	$Music.play()
 
 
 func _on_mob_timer_timeout():
